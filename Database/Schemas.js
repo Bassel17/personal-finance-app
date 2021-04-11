@@ -7,7 +7,7 @@ const Income = {
         source:"string",
         currency:"string",
         amount:"double",
-        creationDate:"date"
+        createdAt:"date"
     },
     primaryKey: '_id',
 }
@@ -19,7 +19,7 @@ const Expense = {
         description:"string",
         currency:"string",
         amount:"double",
-        creationDate:"date"
+        createdAt:"date"
     },
     primaryKey: '_id',
 }

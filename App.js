@@ -1,34 +1,22 @@
 
-import React, {useState } from 'react';
-import {useWindowDimensions } from 'react-native';
-import { TabView, SceneMap,TabBar } from 'react-native-tab-view';
-import {Review, Income, Expenses} from './screens';
+import React from 'react';
+import Main from "./naviagtion/main";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import {AddIncome, AddExpense} from './screens'
+
+const Stack = createStackNavigator();
 
 const App = () => {
-  const layout = useWindowDimensions();
-  const [index, setIndex] = useState(0);
-
-  const routes = [
-    { key: 'review', title: 'Review' },
-    { key: 'income', title: 'Income'},
-    { key: 'expenses', title: 'Expenses'},
-  ]
-
-  const renderScene = SceneMap({
-    review:Review,
-    income: Income,
-    expenses: Expenses,
-  });
-
   return (
-    <TabView
-      renderTabBar={props => <TabBar {...props} indicatorStyle={{backgroundColor:"#fff"}} />}
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }}
-    />
-  );
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home" >
+        <Stack.Screen options={{headerShown:false}} name="Home" component={Main} />
+        <Stack.Screen name="AddIncome" component={AddIncome} />
+        <Stack.Screen name="AddExpense" component={AddExpense} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
 

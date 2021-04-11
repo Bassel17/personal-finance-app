@@ -2,7 +2,6 @@ import realm from './Schemas'
 
 const addIncome = ({
         amount,
-        creationDate,
         currency,
         source
     }) => {
@@ -10,7 +9,7 @@ const addIncome = ({
         realm.create('Income',{
             _id:new Date().getTime(),
             amount,
-            creationDate,
+            createdAt:new Date(),
             currency,
             source
         });
@@ -19,7 +18,6 @@ const addIncome = ({
 
 const addExpense = ({
         amount,
-        creationDate,
         currency,
         description
     }) => {
@@ -27,7 +25,7 @@ const addExpense = ({
         realm.create('Expense',{
             _id:new Date().getTime(),
             amount,
-            creationDate,
+            createdAt:new Date(),
             currency,
             description
         });
