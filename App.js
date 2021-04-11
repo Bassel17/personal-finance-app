@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, {useState } from 'react';
 import {useWindowDimensions } from 'react-native';
 import { TabView, SceneMap,TabBar } from 'react-native-tab-view';
 import {Review, Income, Expenses} from './screens';
