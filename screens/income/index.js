@@ -1,16 +1,36 @@
-import React from 'react';
-import { Title ,Button} from 'react-native-paper';
+import React, {useEffect,useState} from 'react';
+import { Title ,Button, Text, Divider} from 'react-native-paper';
 import { View } from 'react-native';
+import {retrieveAll} from '../../Database/Account';
 
-const Income = ({navigation}) => (
+const Income = ({navigation}) => {
+
+  const [data,setData] = useState([]);
+
+  useEffect(()=>{
+    setData(retrieveAll('Income'));
+  },[])
+
+  if(data[0] == undefined){
+    return (<View></View>)
+  }
+
+  return (
     <View style={{ 
-        flex: 1, 
-        backgroundColor: '#673ab7',
+        flex: 1,
         alignItems:"center" 
     }} >
-      <Title style={{color:"#ffffff"}}>Income</Title>
+      {data.map((income,index)=>(
+        <View key={index}>
+          <Title>{income.source}</Title>
+          <Text>{income.amount}</Text>
+          <Text>{income.currency}</Text>
+          <Divider/>
+        </View>
+      ))}
       <Button onPress={()=>navigation.navigate("AddIncome")}>Add Income</Button>
     </View>
-);
+  );
+}
 
 export default Income;
