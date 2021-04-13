@@ -3,12 +3,21 @@ import { Title, TextInput, Menu, Button ,Provider} from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import {addIncome} from '../../Database/Account';
 
-const AddIncome = () => {
+const AddIncome = ({navigation}) => {
 
   const [source, setSource] = useState("");
   const [amount, setAmount] = useState("0");
   const [currency,setCurrency] = useState("LBP");
-  const [visible,setVisible] = useState(false)
+  const [visible,setVisible] = useState(false);
+
+  const add = () => {
+    addIncome({
+      amount:parseFloat(amount),
+      currency,
+      source
+    });
+    navigation.goBack();
+  }
   
   return (
     <Provider>
@@ -40,11 +49,7 @@ const AddIncome = () => {
             }} title="USD" />
           </Menu>
         </View>
-        <Button onPress={()=>addIncome({
-          amount:parseFloat(amount),
-          currency,
-          source
-        })}>Add Income</Button>
+        <Button onPress={add}>Add Income</Button>
       </View>
     </Provider>
   );
