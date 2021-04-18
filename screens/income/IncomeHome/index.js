@@ -3,6 +3,7 @@ import {FAB, Title, Button, Text, Divider} from 'react-native-paper';
 import {View} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 import {retrieveAll} from '../../../Database/Account';
+import styles from './style';
 import dayjs from 'dayjs';
 
 const Income = ({navigation}) => {
@@ -11,39 +12,13 @@ const Income = ({navigation}) => {
 
   const IncomeEntry = ({title, amount, currency, createdAt}) => {
     return (
-      <View
-        style={{
-          padding: 13,
-          alignSelf: 'stretch',
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-        }}>
-        <View
-          style={{
-            alignItems: 'flex-start',
-            justifyContent: 'space-between',
-          }}>
-          <Text
-            style={{
-              fontSize: 18,
-            }}>
-            Cabbis Fulltime
-          </Text>
+      <View style={styles.incomeEntry}>
+        <View style={styles.titleAndTimestampContainer}>
+          <Text style={styles.incomeTitle}>{title}</Text>
           <Text>{dayjs(createdAt).fromNow()}</Text>
         </View>
-        <View
-          style={{
-            alignItems: 'flex-end',
-            justifyContent: 'space-between',
-          }}>
-          <Text
-            style={{
-              fontSize: 21,
-              color: '#5bbf59',
-              fontWeight: 'bold',
-            }}>
-            {amount}
-          </Text>
+        <View style={styles.amountAndCurrencyContainer}>
+          <Text style={styles.amount}>{amount}</Text>
           <Text>{currency}</Text>
         </View>
       </View>
@@ -53,6 +28,7 @@ const Income = ({navigation}) => {
   useEffect(() => {
     setData(retrieveAll('Income'));
   }, [isFocused]);
+
   return (
     <View
       style={{
@@ -61,13 +37,8 @@ const Income = ({navigation}) => {
         alignSelf: 'stretch',
       }}>
       {data.map(({source, amount, currency, createdAt}, i) => (
-        <View
-          style={{
-            alignSelf: 'stretch',
-          }}
-          key={i}>
+        <View style={styles.incomeEntryContainer} key={i}>
           <IncomeEntry
-            onPress={() => console.log('henlo')}
             title={source}
             amount={amount}
             currency={currency}
@@ -77,13 +48,7 @@ const Income = ({navigation}) => {
         </View>
       ))}
       <FAB
-        style={{
-          position: 'absolute',
-          margin: 16,
-          right: 0,
-          bottom: 0,
-          backgroundColor: '#5bbf59',
-        }}
+        style={styles.addActionButton}
         icon="plus"
         color="white"
         onPress={() => navigation.navigate('AddIncome')}
