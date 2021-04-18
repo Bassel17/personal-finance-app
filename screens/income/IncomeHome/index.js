@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {FAB, Title, Button, Text, Divider} from 'react-native-paper';
 import {View} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
-import {retrieveAll} from '../../Database/Account';
+import {retrieveAll} from '../../../Database/Account';
 import dayjs from 'dayjs';
 
 const Income = ({navigation}) => {
